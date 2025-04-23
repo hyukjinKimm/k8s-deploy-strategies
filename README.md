@@ -1,5 +1,3 @@
-# k8s-deploy-strategies
-
 # Kubernetes 배포 전략
 Argo Rollouts, Istio 및 K8s 네이티브 리소스를 사용하여 **BlueGreen**, **Canary**, **A/B 테스트** 배포 전략을 구현.
 
