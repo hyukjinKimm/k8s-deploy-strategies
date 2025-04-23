@@ -93,3 +93,12 @@ kubectl argo rollouts get rollout my-app
 # 롤백
 kubectl argo rollouts undo my-app --to-revision=1
 ```
+
+### 3. A/B 전략
+```bash
+# Istio Ingress Gateway가 80 포트를 NodePort (예: :32502)로 열고 있을 경우
+curl -H "Cookie: abtest=true" http://ab-test.example.com:32502/
+→ Preview 버전 접근
+curl http://ab-test.example.com:32502/
+→ Active 버전 접근
+```
