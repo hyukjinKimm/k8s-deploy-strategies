@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: ab-test-app
+spec:
+  replicas: 3
+  strategy:
+    blueGreen:
+      activeService: ab-test-active
+      previewService: ab-test-preview
+      autoPromotionEnabled: false
+  selector:
+    matchLabels:
+      app: ab-test
+  template:
+    metadata:
+      labels:
+        app: ab-test
+    spec:
+      containers:
+      - name: app
+        image: registry.hyukjin.io:5000/nginx:v20250422123952
+ 
+

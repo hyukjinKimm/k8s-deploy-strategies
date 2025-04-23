@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: new-app
+  namespace: default
+spec:
+  replicas: 5
+  strategy:
+    blueGreen:
+      activeService: new-app-active
+      previewService: new-app-preview
+      autoPromotionEnabled: false
+      scaleDownDelaySeconds: 30
+  selector:
+    matchLabels:
+      app: new-app
+  template:
+    metadata:
+      labels:
+        app: new-app
+    spec:
+      containers:
+        - name: new-app
+          image: registry.hyukjin.io:5000/nginx:v20250423091446
+          ports:
+            - containerPort: 80
+

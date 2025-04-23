@@ -1,0 +1,25 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: ab-test-routing
+spec:
+  hosts:
+    - ab-test.example.com
+  gateways:
+    - ab-test-gateway
+  http:
+    - match:
+        - headers:
+            cookie:
+              regex: ".*abtest=true.*"
+      route:
+        - destination:
+            host: ab-test-preview
+            port:
+              number: 80
+    - route:
+        - destination:
+            host: ab-test-active
+            port:
+              number: 80
+
